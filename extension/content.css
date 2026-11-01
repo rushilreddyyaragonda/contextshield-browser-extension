@@ -1,0 +1,6 @@
+/* ContextShield Content Script Styles */
+/* Minimal — most styles are in Shadow DOM */
+
+#contextshield-annotation-host {
+  all: initial;
+}

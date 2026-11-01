@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ContextShield — Research Workspace</title>
+  <link rel="stylesheet" href="workspace.css" />
+</head>
+<body>
+  <nav class="ws-nav">
+    <div class="ws-nav-brand">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 1L2 5v6c0 5.5 3.8 8.5 9 10 5.2-1.5 9-4.5 9-10V5l-9-4z" stroke="#1e3a5f" stroke-width="1.5" fill="#f5f1e8"/>
+        <path d="M7 11l2.5 2.5L15 8" stroke="#c4952e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="ws-nav-title">ContextShield</span>
+      <span class="ws-nav-sub">Research Workspace</span>
+    </div>
+    <div class="ws-nav-tabs">
+      <button class="ws-tab active" data-tab="inspect">Inspect</button>
+      <button class="ws-tab" data-tab="compare">Compare</button>
+      <button class="ws-tab" data-tab="sources">Sources</button>
+      <button class="ws-tab" data-tab="notes">Notes</button>
+      <button class="ws-tab" data-tab="history">History</button>
+    </div>
+    <div class="ws-nav-actions">
+      <button class="ws-nav-btn" id="ws-export-json">Export JSON</button>
+      <button class="ws-nav-btn" id="ws-export-md">Export Markdown</button>
+      <button class="ws-nav-btn" id="ws-settings">Settings</button>
+    </div>
+  </nav>
+
+  <!-- Inspect Tab -->
+  <div class="ws-tab-content active" id="ws-tab-inspect">
+    <div class="ws-layout">
+      <div class="ws-input-panel">
+        <h2 class="ws-section-heading">Claim Inspector</h2>
+        <p class="ws-help-text">Paste or edit a passage to analyze. ContextShield classifies the claim type and detects potential context gaps using local, deterministic rules.</p>
+        <textarea id="ws-inspect-input" class="ws-textarea" placeholder="Paste a statement or passage here…" rows="6"></textarea>
+        <div class="ws-input-actions">
+          <button class="ws-primary-btn" id="ws-inspect-run">Analyze Passage</button>
+          <button class="ws-secondary-btn" id="ws-inspect-clear">Clear</button>
+        </div>
+        <div class="ws-source-field">
+          <label for="ws-source-url">Source URL (optional)</label>
+          <input type="url" id="ws-source-url" class="ws-input" placeholder="https://…" />
+        </div>
+      </div>
+      <div class="ws-results-panel" id="ws-inspect-results">
+        <div class="ws-empty-state">Results will appear here after analysis.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compare Tab -->
+  <div class="ws-tab-content" id="ws-tab-compare">
+    <div class="ws-layout">
+      <div class="ws-input-panel">
+        <h2 class="ws-section-heading">Contradiction Workspace</h2>
+        <p class="ws-help-text">Compare two statements or excerpts. Surface-level text comparison identifies differences in numbers, dates, entities, and polarity — but cannot reliably detect semantic contradictions.</p>
+        <div class="ws-compare-inputs">
+          <div class="ws-compare-field">
+            <label>Passage A</label>
+            <textarea id="ws-compare-a" class="ws-textarea" placeholder="First statement…" rows="5"></textarea>
+          </div>
+          <div class="ws-compare-field">
+            <label>Passage B</label>
+            <textarea id="ws-compare-b" class="ws-textarea" placeholder="Second statement…" rows="5"></textarea>
+          </div>
+        </div>
+        <button class="ws-primary-btn" id="ws-compare-run">Compare Passages</button>
+        <div class="ws-compare-note-field">
+          <label for="ws-compare-note">Your interpretation (optional)</label>
+          <textarea id="ws-compare-note" class="ws-textarea" placeholder="Record your assessment of the comparison…" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="ws-results-panel" id="ws-compare-results">
+        <div class="ws-empty-state">Comparison results will appear here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sources Tab -->
+  <div class="ws-tab-content" id="ws-tab-sources">
+    <div class="ws-layout">
+      <div class="ws-input-panel">
+        <h2 class="ws-section-heading">Source Inspector</h2>
+        <p class="ws-help-text">Extract available metadata and source links from the current webpage. Only data accessible through the page DOM is used — no external requests are made.</p>
+        <button class="ws-primary-btn" id="ws-sources-run">Inspect Current Page</button>
+      </div>
+      <div class="ws-results-panel" id="ws-sources-results">
+        <div class="ws-empty-state">Source information will appear here after inspection.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes Tab -->
+  <div class="ws-tab-content" id="ws-tab-notes">
+    <div class="ws-layout">
+      <div class="ws-input-panel">
+        <h2 class="ws-section-heading">Research Notes</h2>
+        <p class="ws-help-text">Save personal annotations, URLs, and verification status. Notes are stored locally and never transmitted.</p>
+        <div class="ws-note-form">
+          <textarea id="ws-note-text" class="ws-textarea" placeholder="Write a research note…" rows="4"></textarea>
+          <input type="url" id="ws-note-url" class="ws-input" placeholder="Related URL (optional)" />
+          <div class="ws-note-row">
+            <select id="ws-note-status" class="ws-select">
+              <option value="not_reviewed">Not reviewed</option>
+              <option value="needs_evidence">Needs evidence</option>
+              <option value="evidence_located">Evidence located</option>
+              <option value="partially_supported">Partially supported</option>
+              <option value="conflicting_evidence">Conflicting evidence found</option>
+              <option value="unresolved">Unresolved</option>
+            </select>
+            <button class="ws-primary-btn" id="ws-note-add">Add Note</button>
+          </div>
+        </div>
+      </div>
+      <div class="ws-results-panel" id="ws-notes-list">
+        <div class="ws-empty-state">Your saved notes will appear here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- History Tab -->
+  <div class="ws-tab-content" id="ws-tab-history">
+    <div class="ws-layout">
+      <div class="ws-input-panel">
+        <h2 class="ws-section-heading">Inspection History</h2>
+        <p class="ws-help-text">Previous inspections are stored locally. You can delete individual records or clear all data from Settings.</p>
+        <button class="ws-secondary-btn ws-danger-btn" id="ws-clear-history">Clear All History</button>
+      </div>
+      <div class="ws-results-panel" id="ws-history-list">
+        <div class="ws-empty-state">No inspections recorded yet.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="lib/claim-analyzer.js"></script>
+  <script src="lib/context-detector.js"></script>
+  <script src="lib/source-inspector.js"></script>
+  <script src="lib/comparison-engine.js"></script>
+  <script src="lib/storage-manager.js"></script>
+  <script src="workspace.js"></script>
+</body>
+</html>

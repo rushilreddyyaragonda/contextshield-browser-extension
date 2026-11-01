@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ContextShield Settings</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f7f4ed;
+      --surface: #ffffff;
+      --ink: #1a1a1a;
+      --ink-soft: #4a4238;
+      --muted: #8a7e62;
+      --border: #d4ccb8;
+      --border-light: #e8e0cc;
+      --primary: #1e3a5f;
+      --accent: #c4952e;
+      --danger: #b03020;
+      --danger-light: #fbeae8;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .opts-container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .opts-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--accent);
+    }
+    .opts-header h1 {
+      font-size: 22px;
+      color: var(--primary);
+    }
+    .opts-section {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .opts-section h2 {
+      font-size: 16px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .opts-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .opts-row:last-child { border-bottom: none; }
+    .opts-row-label {
+      display: flex;
+      flex-direction: column;
+    }
+    .opts-row-label strong { font-size: 14px; color: var(--ink); }
+    .opts-row-label span { font-size: 12px; color: var(--muted); }
+    .opts-toggle {
+      position: relative;
+      width: 40px;
+      height: 22px;
+    }
+    .opts-toggle input { opacity: 0; width: 40px; height: 22px; position: absolute; }
+    .opts-toggle-slider {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--border);
+      border-radius: 11px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .opts-toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 16px; height: 16px;
+      left: 3px; top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    .opts-toggle input:checked + .opts-toggle-slider { background: var(--primary); }
+    .opts-toggle input:checked + .opts-toggle-slider::before { transform: translateX(18px); }
+    .opts-toggle input:focus-visible + .opts-toggle-slider { outline: 2px solid var(--accent); }
+    .opts-input {
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 13px;
+      width: 100px;
+    }
+    .opts-select {
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 13px;
+    }
+    .opts-btn {
+      background: var(--primary);
+      color: #f7f4ed;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .opts-btn:hover { background: #2a4f7a; }
+    .opts-btn-secondary {
+      background: var(--surface);
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+    .opts-btn-danger {
+      background: var(--surface);
+      color: var(--danger);
+      border: 1px solid var(--danger);
+    }
+    .opts-btn-danger:hover { background: var(--danger-light); }
+    .opts-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .opts-info {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .opts-feedback {
+      padding: 10px 14px;
+      border-radius: 4px;
+      margin: 12px 0;
+      font-size: 13px;
+      display: none;
+    }
+    .opts-feedback.show { display: block; }
+    .opts-feedback.success { background: #e8f0e8; color: #2a6a3a; }
+    .opts-feedback.error { background: var(--danger-light); color: var(--danger); }
+    .opts-permissions-list {
+      list-style: none;
+    }
+    .opts-permissions-list li {
+      padding: 6px 0;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .opts-permissions-list li strong { color: var(--primary); }
+    .opts-version {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="opts-container">
+    <div class="opts-header">
+      <svg width="24" height="24" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 1L2 5v6c0 5.5 3.8 8.5 9 10 5.2-1.5 9-4.5 9-10V5l-9-4z" stroke="#1e3a5f" stroke-width="1.5" fill="#f5f1e8"/>
+        <path d="M7 11l2.5 2.5L15 8" stroke="#c4952e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>ContextShield Settings</h1>
+    </div>
+
+    <div id="opts-feedback" class="opts-feedback"></div>
+
+    <div class="opts-section">
+      <h2>General</h2>
+      <div class="opts-row">
+        <div class="opts-row-label">
+          <strong>Inspection history</strong>
+          <span>Save recent inspections locally for review</span>
+        </div>
+        <label class="opts-toggle">
+          <input type="checkbox" id="opt-history" />
+          <span class="opts-toggle-slider"></span>
+        </label>
+      </div>
+      <div class="opts-row">
+        <div class="opts-row-label">
+          <strong>In-page annotations</strong>
+          <span>Show analysis results directly on webpages</span>
+        </div>
+        <label class="opts-toggle">
+          <input type="checkbox" id="opt-annotations" />
+          <span class="opts-toggle-slider"></span>
+        </label>
+      </div>
+      <div class="opts-row">
+        <div class="opts-row-label">
+          <strong>Context menu</strong>
+          <span>Add "Inspect with ContextShield" to the right-click menu</span>
+        </div>
+        <label class="opts-toggle">
+          <input type="checkbox" id="opt-context-menu" />
+          <span class="opts-toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="opts-section">
+      <h2>Analysis</h2>
+      <div class="opts-row">
+        <div class="opts-row-label">
+          <strong>Maximum text length</strong>
+          <span>Maximum characters processed per analysis</span>
+        </div>
+        <input type="number" class="opts-input" id="opt-max-length" min="1000" max="100000" step="1000" />
+      </div>
+      <div class="opts-row">
+        <div class="opts-row-label">
+          <strong>Results layout</strong>
+          <span>How analysis results are displayed</span>
+        </div>
+        <select class="opts-select" id="opt-layout">
+          <option value="detailed">Detailed</option>
+          <option value="compact">Compact</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="opts-section">
+      <h2>Data Management</h2>
+      <div class="opts-actions">
+        <button class="opts-btn opts-btn-secondary" id="opt-export-json">Export Data (JSON)</button>
+        <button class="opts-btn opts-btn-secondary" id="opt-export-md">Export Data (Markdown)</button>
+        <button class="opts-btn opts-btn-danger" id="opt-clear-data">Clear All Data</button>
+      </div>
+      <p class="opts-info">All data is stored locally in your browser. Nothing is transmitted to any server. Clearing data is permanent and cannot be undone.</p>
+    </div>
+
+    <div class="opts-section">
+      <h2>Permissions</h2>
+      <ul class="opts-permissions-list">
+        <li><strong>activeTab</strong> — Access the current tab only when you explicitly trigger an action</li>
+        <li><strong>contextMenus</strong> — Add the "Inspect with ContextShield" right-click menu item</li>
+        <li><strong>storage</strong> — Save settings, notes, and inspection history locally</li>
+      </ul>
+      <p class="opts-info">ContextShield does not request broad host permissions. Analysis runs on-demand when you choose to inspect text or a page.</p>
+    </div>
+
+    <div class="opts-section">
+      <h2>About</h2>
+      <p class="opts-info" style="font-size:13px;color:var(--ink-soft);">ContextShield v1.0.0 — A browser extension for investigating online claims, discovering missing context, and evaluating evidence. All analysis runs locally using deterministic rules. No remote API, AI service, or account is required.</p>
+    </div>
+
+    <div class="opts-version">ContextShield v1.0.0 — Local processing only</div>
+  </div>
+
+  <script src="lib/storage-manager.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

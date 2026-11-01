@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ContextShield</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="cs-popup">
+    <header class="cs-header">
+      <div class="cs-logo-row">
+        <svg class="cs-logo-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 1L2 5v6c0 5.5 3.8 8.5 9 10 5.2-1.5 9-4.5 9-10V5l-9-4z" stroke="#1e3a5f" stroke-width="1.5" fill="#f5f1e8"/>
+          <path d="M7 11l2.5 2.5L15 8" stroke="#c4952e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="cs-logo-text">
+          <span class="cs-product-name">ContextShield</span>
+          <span class="cs-local-badge">Local processing</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="cs-page-info" id="cs-page-info">
+      <div class="cs-page-label">Current page</div>
+      <div class="cs-page-title" id="cs-page-title">Loading…</div>
+      <div class="cs-page-domain" id="cs-page-domain"></div>
+    </section>
+
+    <section class="cs-actions">
+      <button class="cs-action-btn" id="cs-btn-inspect" data-action="inspect">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span>Inspect Selected Text</span>
+      </button>
+      <button class="cs-action-btn" id="cs-btn-analyze" data-action="analyze">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="2" y="2" width="12" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span>Analyze Current Page</span>
+      </button>
+      <button class="cs-action-btn" id="cs-btn-compare" data-action="compare">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M2 4h5M2 4v5M9 12h5M9 12V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M2 4l3 3M14 12l-3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span>Compare Statements</span>
+      </button>
+      <button class="cs-action-btn cs-action-secondary" id="cs-btn-workspace" data-action="workspace">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M2 3h12v10H2z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M5 6h6M5 9h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span>Open Research Workspace</span>
+      </button>
+    </section>
+
+    <section class="cs-status" id="cs-status-section">
+      <div class="cs-status-content" id="cs-status-content"></div>
+    </section>
+
+    <section class="cs-recent" id="cs-recent-section">
+      <div class="cs-section-label">Recent activity</div>
+      <div class="cs-recent-list" id="cs-recent-list">
+        <div class="cs-recent-empty">No recent inspections</div>
+      </div>
+    </section>
+
+    <footer class="cs-footer">
+      <button class="cs-footer-btn" id="cs-btn-settings">Settings</button>
+      <button class="cs-footer-btn" id="cs-btn-privacy">Privacy</button>
+      <button class="cs-footer-btn" id="cs-btn-help">Help</button>
+      <span class="cs-version">v1.0.0</span>
+    </footer>
+  </div>
+
+  <script src="lib/claim-analyzer.js"></script>
+  <script src="lib/context-detector.js"></script>
+  <script src="lib/storage-manager.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

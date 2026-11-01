@@ -1,0 +1,358 @@
+/* ContextShield Popup Styles */
+/* Compact, investigative-research aesthetic — warm neutrals, ink text, cobalt accents */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 340px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: #f7f4ed;
+  color: #1a1a1a;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#cs-popup {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.cs-header {
+  background: #1e3a5f;
+  padding: 10px 14px;
+  border-bottom: 2px solid #c4952e;
+}
+
+.cs-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cs-logo-icon {
+  flex-shrink: 0;
+}
+
+.cs-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-product-name {
+  color: #f7f4ed;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+}
+
+.cs-local-badge {
+  color: #9bb8d4;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Page info */
+.cs-page-info {
+  padding: 10px 14px;
+  background: #fff;
+  border-bottom: 1px solid #e0d9c8;
+}
+
+.cs-page-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8a7e62;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.cs-page-title {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.cs-page-domain {
+  font-size: 11px;
+  color: #6b6256;
+  margin-top: 1px;
+}
+
+/* Actions */
+.cs-actions {
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cs-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #d4ccb8;
+  border-radius: 6px;
+  background: #fff;
+  color: #1e3a5f;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  text-align: left;
+  font-family: inherit;
+}
+
+.cs-action-btn:hover {
+  background: #f0ece0;
+  border-color: #c4952e;
+}
+
+.cs-action-btn:active {
+  background: #e8e2d0;
+}
+
+.cs-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cs-action-btn:focus-visible {
+  outline: 2px solid #1e3a5f;
+  outline-offset: 1px;
+}
+
+.cs-action-secondary {
+  background: #1e3a5f;
+  color: #f7f4ed;
+  border-color: #1e3a5f;
+}
+
+.cs-action-secondary:hover {
+  background: #2a4f7a;
+  border-color: #2a4f7a;
+}
+
+/* Status */
+.cs-status {
+  padding: 8px 14px;
+  min-height: 32px;
+}
+
+.cs-status-content {
+  font-size: 11px;
+  color: #6b6256;
+  line-height: 1.5;
+}
+
+.cs-status-info {
+  padding: 6px 10px;
+  background: #eef3f8;
+  border-left: 3px solid #1e3a5f;
+  border-radius: 2px;
+}
+
+.cs-status-warn {
+  padding: 6px 10px;
+  background: #fdf6e8;
+  border-left: 3px solid #c4952e;
+  border-radius: 2px;
+}
+
+.cs-status-error {
+  padding: 6px 10px;
+  background: #fbeae8;
+  border-left: 3px solid #b03020;
+  border-radius: 2px;
+}
+
+/* Recent activity */
+.cs-recent {
+  padding: 8px 14px;
+  border-top: 1px solid #e0d9c8;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.cs-section-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8a7e62;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.cs-recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cs-recent-item {
+  padding: 6px 8px;
+  background: #fff;
+  border: 1px solid #e8e0cc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.cs-recent-item:hover {
+  border-color: #c4952e;
+}
+
+.cs-recent-item-label {
+  font-size: 10px;
+  color: #1e3a5f;
+  font-weight: 600;
+}
+
+.cs-recent-item-text {
+  font-size: 11px;
+  color: #4a4238;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+.cs-recent-item-time {
+  font-size: 9px;
+  color: #a0967c;
+  margin-top: 1px;
+}
+
+.cs-recent-empty {
+  font-size: 11px;
+  color: #a0967c;
+  font-style: italic;
+  padding: 4px 0;
+}
+
+/* Footer */
+.cs-footer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  background: #1a1a1a;
+  border-top: 1px solid #333;
+}
+
+.cs-footer-btn {
+  background: none;
+  border: none;
+  color: #b8a886;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 3px;
+  transition: color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+
+.cs-footer-btn:hover {
+  color: #f7f4ed;
+  background: rgba(255,255,255,0.08);
+}
+
+.cs-footer-btn:focus-visible {
+  outline: 2px solid #c4952e;
+  outline-offset: 1px;
+}
+
+.cs-version {
+  margin-left: auto;
+  font-size: 10px;
+  color: #6b6256;
+}
+
+/* Scrollbar */
+.cs-recent::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cs-recent::-webkit-scrollbar-thumb {
+  background: #d4ccb8;
+  border-radius: 3px;
+}
+
+/* Inline analysis results */
+.cs-inline-results {
+  padding: 10px 14px;
+  border-top: 1px solid #e0d9c8;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.cs-result-passage {
+  background: #fff;
+  border: 1px solid #e0d9c8;
+  border-radius: 5px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+
+.cs-result-label {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.cs-label-factual { background: #e3edf6; color: #1e3a5f; }
+.cs-label-opinion { background: #fdf0e0; color: #8a5a10; }
+.cs-label-prediction { background: #f0e8f5; color: #5a3a7a; }
+.cs-label-question { background: #e8f0e8; color: #2a5a2a; }
+.cs-label-generalization { background: #fbeae8; color: #8a2a20; }
+.cs-label-numerical { background: #e0f0f5; color: #1a5a7a; }
+.cs-label-instruction { background: #f5e8e0; color: #7a4a2a; }
+
+.cs-result-text {
+  font-size: 12px;
+  color: #1a1a1a;
+  line-height: 1.5;
+  font-style: italic;
+  margin-bottom: 6px;
+}
+
+.cs-gap-item {
+  padding: 5px 8px;
+  background: #fdf6e8;
+  border-left: 3px solid #c4952e;
+  border-radius: 2px;
+  margin-top: 4px;
+}
+
+.cs-gap-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #8a5a10;
+}
+
+.cs-gap-question {
+  font-size: 11px;
+  color: #4a4238;
+  margin-top: 2px;
+}
+
+.cs-no-gaps {
+  font-size: 11px;
+  color: #6b6256;
+  padding: 4px 0;
+}
